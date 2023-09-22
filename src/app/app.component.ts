@@ -11,5 +11,5 @@ export class AppComponent {
 }
 
 $(document).ready(()=>{
-  alert("asd")
+  //alert("asd")
 })
