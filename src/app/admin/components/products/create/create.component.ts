@@ -24,6 +24,17 @@ export class CreateComponent extends BaseComponent{
     create_product.name = name.value;
     create_product.price = parseFloat(price.value);
     create_product.stock = parseInt(stock.value);
+
+    if(!name.value)
+    {
+      this.alertify.message("lütfen ürün adını giriniz",
+        {
+          dismissOthers:true,
+          messageType:MessageType.Error,
+          messagePosition:MessagePosition.BottomRight
+        });
+      return;
+    }
     this.productService.create(create_product,()=>{
       this.hideSpinner(SpinnerType.ballAtom);
       this.alertify.message("ürün başarıyla eklenmiştir",{
@@ -31,6 +42,13 @@ export class CreateComponent extends BaseComponent{
         messagePosition:MessagePosition.TopRight,
         messageType:MessageType.Success
       });
+    }, errorMessage => {
+      this.alertify.message(errorMessage,
+        {
+          dismissOthers:true,
+          messageType:MessageType.Error,
+          messagePosition:MessagePosition.TopRight
+        });
     });
   }
 }
